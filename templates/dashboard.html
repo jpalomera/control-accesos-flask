@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Control de accesos</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">SEGURIDAD · TIEMPO REAL</p>
+      <h1>Control de accesos</h1>
+    </div>
+    <span class="status"><i></i> MongoDB Atlas</span>
+  </header>
+
+  <main>
+    {% if error %}<div class="alert error">{{ error }}</div>{% endif %}
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% for category, message in messages %}<div class="alert {{ category }}">{{ message }}</div>{% endfor %}
+    {% endwith %}
+
+    <section class="metrics">
+      <article><span>Usuarios</span><strong>{{ usuarios|length }}</strong></article>
+      <article><span>Puntos activos</span><strong>{{ puntos|selectattr('activo')|list|length }}</strong></article>
+      <article class="ok"><span>Permitidos</span><strong>{{ permitidos }}</strong></article>
+      <article class="danger"><span>Denegados</span><strong>{{ denegados }}</strong></article>
+    </section>
+
+    <section class="grid">
+      <article class="panel form-panel">
+        <h2>Registrar acceso</h2>
+        <form method="post" action="{{ url_for('crear_registro') }}">
+          <label>Usuario
+            <select name="usuario_id" required>
+              <option value="">Seleccionar</option>
+              {% for usuario in usuarios %}<option value="{{ usuario.usuario_id }}">{{ usuario.nombre }}</option>{% endfor %}
+            </select>
+          </label>
+          <label>Punto de acceso
+            <select name="punto_id" required>
+              <option value="">Seleccionar</option>
+              {% for punto in puntos %}<option value="{{ punto.punto_id }}">{{ punto.nombre }}</option>{% endfor %}
+            </select>
+          </label>
+          <label>Resultado
+            <select name="resultado"><option value="permitido">Permitido</option><option value="denegado">Denegado</option></select>
+          </label>
+          <label>Motivo<input name="motivo" value="registro_manual"></label>
+          <button type="submit">Guardar registro</button>
+        </form>
+      </article>
+
+      <article class="panel activity">
+        <div class="panel-title"><h2>Actividad reciente</h2><span>{{ registros|length }} eventos</span></div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Fecha</th><th>Usuario</th><th>Acceso</th><th>Resultado</th><th>Motivo</th></tr></thead>
+            <tbody>
+              {% for registro in registros %}
+              <tr>
+                <td>{{ registro.fecha }}</td><td>{{ registro.usuario_id }}</td><td>{{ registro.punto_id }}</td>
+                <td><span class="badge {{ registro.resultado }}">{{ registro.resultado }}</span></td><td>{{ registro.motivo }}</td>
+              </tr>
+              {% else %}<tr><td colspan="5">No hay registros.</td></tr>{% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </article>
+    </section>
+  </main>
+</body>
+</html>
