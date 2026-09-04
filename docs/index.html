@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Control de accesos · Demo</title>
+  <style>
+    :root{color-scheme:dark;--bg:#07100e;--panel:#0d1916;--line:#20332d;--text:#edf8f3;--muted:#8da69c;--green:#36d893;--red:#ff6b6b}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 80% 0,#12352a 0,transparent 35%),var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif;min-height:100vh}.top{padding:32px clamp(20px,6vw,80px);border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:20px;align-items:center}.eyebrow{color:var(--green);font:600 12px ui-monospace,monospace;letter-spacing:.16em}.top h1{margin:4px 0;font-size:clamp(28px,5vw,48px)}.status{color:var(--muted)}.status i{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 14px var(--green);margin-right:8px}main{padding:32px clamp(20px,6vw,80px)}.notice{padding:12px 15px;border:1px solid #315647;border-radius:12px;background:#10231c;color:#a7cfbc;margin-bottom:18px}.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.card,.panel{background:linear-gradient(145deg,#101f1b,#0b1613);border:1px solid var(--line);border-radius:16px}.card{padding:20px}.card span{color:var(--muted);font-size:13px}.card strong{display:block;font-size:34px;margin-top:8px}.green{color:var(--green)}.red{color:var(--red)}.panel{margin-top:18px;padding:22px}.panel-head{display:flex;justify-content:space-between}.panel-head span{color:var(--muted)}table{width:100%;border-collapse:collapse;font-size:14px}th,td{text-align:left;padding:14px 10px;border-bottom:1px solid var(--line)}th{color:var(--muted);font-weight:500}.badge{padding:5px 9px;border-radius:999px;font-weight:700}.permitido{background:#173d2e;color:#65e5aa}.denegado{background:#472324;color:#ff8e8e}.actions{margin-top:20px}.actions a{display:inline-block;text-decoration:none;background:var(--green);color:#04110c;font-weight:800;padding:11px 16px;border-radius:10px}@media(max-width:700px){.metrics{grid-template-columns:1fr 1fr}.top{align-items:flex-start;flex-direction:column}.panel{overflow:auto}}
+  </style>
+</head>
+<body>
+  <header class="top"><div><div class="eyebrow">SEGURIDAD · DEMOSTRACIÓN</div><h1>Control de accesos</h1></div><div class="status"><i></i>MongoDB Atlas · plan gratuito</div></header>
+  <main>
+    <div class="notice">Vista demostrativa publicada en GitHub Pages. El backend Flask del repositorio se conecta de forma segura a MongoDB Atlas mediante variables de entorno.</div>
+    <section class="metrics">
+      <article class="card"><span>Usuarios</span><strong>4</strong></article>
+      <article class="card"><span>Puntos activos</span><strong>3</strong></article>
+      <article class="card"><span>Permitidos</span><strong class="green">5</strong></article>
+      <article class="card"><span>Denegados</span><strong class="red">3</strong></article>
+    </section>
+    <section class="panel">
+      <div class="panel-head"><h2>Actividad de prueba</h2><span>8 eventos en Atlas</span></div>
+      <table><thead><tr><th>Usuario</th><th>Punto</th><th>Resultado</th><th>Motivo</th></tr></thead><tbody>
+        <tr><td>USR-001</td><td>ACC-001</td><td><span class="badge permitido">permitido</span></td><td>credencial válida</td></tr>
+        <tr><td>USR-003</td><td>ACC-002</td><td><span class="badge denegado">denegado</span></td><td>rol sin permiso</td></tr>
+        <tr><td>USR-004</td><td>ACC-003</td><td><span class="badge denegado">denegado</span></td><td>usuario inactivo</td></tr>
+        <tr><td>USR-002</td><td>ACC-003</td><td><span class="badge permitido">permitido</span></td><td>credencial válida</td></tr>
+      </tbody></table>
+      <div class="actions"><a href="https://github.com/jpalomera/control-accesos-flask">Ver código Flask</a></div>
+    </section>
+  </main>
+</body>
+</html>

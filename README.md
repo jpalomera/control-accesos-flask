@@ -2,6 +2,10 @@
 
 Aplicación Flask conectada a MongoDB Atlas para consultar usuarios, puntos de acceso y eventos de seguridad, además de registrar accesos manuales.
 
+**Demo pública:** https://jpalomera.github.io/control-accesos-flask/
+
+GitHub Pages publica una demostración estática. Para ejecutar Flask y realizar operaciones reales sobre Atlas se necesita un servidor Python.
+
 ## Colecciones
 
 - `usuarios`
